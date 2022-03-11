@@ -22,7 +22,7 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 28,
-  "iteration": 1646713059186,
+  "iteration": 1646969772794,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -117,7 +117,7 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 4,
+        "w": 3,
         "x": 0,
         "y": 3
       },
@@ -252,8 +252,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 8,
-        "x": 4,
+        "w": 6,
+        "x": 3,
         "y": 3
       },
       "id": 41,
@@ -407,8 +407,8 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 5,
-        "w": 6,
-        "x": 12,
+        "w": 5,
+        "x": 9,
         "y": 3
       },
       "hiddenSeries": false,
@@ -588,6 +588,193 @@
       }
     },
     {
+      "aliasColors": {
+        "Pass / Total": "purple"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 2,
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 14,
+        "y": 3
+      },
+      "hiddenSeries": false,
+      "id": 66,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.4.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "Pass",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "8rUy6pN7z"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT CUMULATIVE_SUM(COUNT(\"case\")) FROM \"all_records_v2\" WHERE (\"status\"=0) AND $timeFilter GROUP BY time($interval) fill(null) ",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Total",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "8rUy6pN7z"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT CUMULATIVE_SUM(COUNT(\"case\")) FROM \"all_records_v2\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
+          "rawQuery": true,
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Pass Rate By Time",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Pass",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:493",
+          "format": "short",
+          "logBase": 1,
+          "max": "1",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:494",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -629,8 +816,8 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 6,
-        "x": 18,
+        "w": 5,
+        "x": 19,
         "y": 3
       },
       "id": 46,
@@ -659,6 +846,10 @@
       "targets": [
         {
           "alias": "AT Sign-off",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "8rUy6pN7z"
+          },
           "groupBy": [
             {
               "params": [
@@ -675,7 +866,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT COUNT(jira_id) FROM \"all_jira_okr_records_v2\" WHERE (\"type\"=0) AND $timeFilter GROUP BY time(24h) fill(null)",
+          "query": "SELECT COUNT(DISTINCT(jira_id)) FROM \"all_jira_okr_records_v2\" WHERE (\"type\"=0) AND $timeFilter GROUP BY time(24h) fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -697,6 +888,10 @@
         },
         {
           "alias": "AT Found-bug",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "8rUy6pN7z"
+          },
           "groupBy": [
             {
               "params": [
@@ -714,7 +909,7 @@
           "hide": false,
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT COUNT(\"jira_id\") FROM \"all_jira_okr_records_v2\" WHERE (\"type\"=1) AND $timeFilter GROUP BY time(24h) fill(null)",
+          "query": "SELECT COUNT(DISTINCT(jira_id))  FROM \"all_jira_okr_records_v2\" WHERE (\"type\"=1) AND $timeFilter GROUP BY time(24h) fill(null)",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -764,7 +959,7 @@
       },
       "gridPos": {
         "h": 2,
-        "w": 4,
+        "w": 3,
         "x": 0,
         "y": 6
       },
@@ -853,8 +1048,8 @@
       },
       "gridPos": {
         "h": 2,
-        "w": 4,
-        "x": 4,
+        "w": 3,
+        "x": 3,
         "y": 6
       },
       "id": 36,
@@ -942,8 +1137,8 @@
       },
       "gridPos": {
         "h": 2,
-        "w": 4,
-        "x": 8,
+        "w": 3,
+        "x": 6,
         "y": 6
       },
       "id": 37,
@@ -1029,7 +1224,7 @@
       },
       "id": 65,
       "options": {
-        "content": "<center><h1 style=\"color:rgb(87, 147, 242);\">AT Contributions</h1></center>",
+        "content": "<center><h1 style=\"color:rgb(87, 147, 242);\">Product Line (${productLine})</h1></center>",
         "mode": "html"
       },
       "pluginVersion": "8.4.3",
@@ -1156,7 +1351,7 @@
         ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 5,
         "w": 5,
         "x": 0,
         "y": 11
@@ -1305,7 +1500,7 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 6,
+        "h": 5,
         "w": 5,
         "x": 5,
         "y": 11
@@ -1502,7 +1697,7 @@
       "fill": 1,
       "fillGradient": 2,
       "gridPos": {
-        "h": 6,
+        "h": 5,
         "w": 5,
         "x": 10,
         "y": 11
@@ -1666,6 +1861,7 @@
       }
     },
     {
+      "description": " '# of maintainers for this API / # of test cases for this API",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1706,7 +1902,7 @@
         ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 5,
         "w": 4,
         "x": 15,
         "y": 11
@@ -1732,7 +1928,7 @@
             "type": "influxdb",
             "uid": "8rUy6pN7z"
           },
-          "query": "SELECT  api, case FROM all_records_v2 WHERE product='$productLine'  AND $timeFilter",
+          "query": "SELECT  api, case, maintainer FROM all_records_v2 WHERE product='$productLine'  AND $timeFilter",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "table"
@@ -1750,7 +1946,12 @@
               },
               "case": {
                 "aggregations": [
-                  "count",
+                  "distinctCount"
+                ],
+                "operation": "aggregate"
+              },
+              "maintainer": {
+                "aggregations": [
                   "distinctCount"
                 ],
                 "operation": "aggregate"
@@ -1763,7 +1964,7 @@
           "options": {
             "alias": "API Activity",
             "binary": {
-              "left": "case (count)",
+              "left": "maintainer (distinctCount)",
               "operator": "/",
               "reducer": "sum",
               "right": "case (distinctCount)"
@@ -1780,7 +1981,8 @@
           "options": {
             "excludeByName": {
               "case (count)": true,
-              "case (distinctCount)": true
+              "case (distinctCount)": true,
+              "maintainer (distinctCount)": true
             },
             "indexByName": {},
             "renameByName": {
@@ -1846,7 +2048,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 5,
         "w": 5,
         "x": 19,
         "y": 11
@@ -1897,7 +2099,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT COUNT(jira_id) FROM \"all_jira_okr_records_v2\" WHERE product='$productLine'  AND (\"type\"=0) AND $timeFilter GROUP BY time(24h) fill(null)",
+          "query": "SELECT COUNT(DISTINCT(jira_id)) FROM \"all_jira_okr_records_v2\" WHERE product='$productLine'  AND (\"type\"=0) AND $timeFilter GROUP BY time(24h) fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1940,7 +2142,7 @@
           "hide": false,
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT COUNT(\"jira_id\") FROM \"all_jira_okr_records_v2\" WHERE product='$productLine'  AND  (\"type\"=1) AND $timeFilter GROUP BY time(24h) fill(null)",
+          "query": "SELECT COUNT(DISTINCT(jira_id)) FROM \"all_jira_okr_records_v2\" WHERE product='$productLine'  AND  (\"type\"=1) AND $timeFilter GROUP BY time(24h) fill(null)",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -1992,7 +2194,7 @@
         "h": 2,
         "w": 3,
         "x": 0,
-        "y": 17
+        "y": 16
       },
       "id": 32,
       "options": {
@@ -2085,7 +2287,7 @@
         "h": 2,
         "w": 3,
         "x": 3,
-        "y": 17
+        "y": 16
       },
       "id": 31,
       "options": {
@@ -2220,7 +2422,7 @@
         "h": 2,
         "w": 6,
         "x": 6,
-        "y": 17
+        "y": 16
       },
       "id": 47,
       "options": {
@@ -2434,7 +2636,7 @@
         "h": 2,
         "w": 6,
         "x": 12,
-        "y": 17
+        "y": 16
       },
       "id": 42,
       "options": {
@@ -2614,7 +2816,7 @@
         "h": 2,
         "w": 3,
         "x": 18,
-        "y": 17
+        "y": 16
       },
       "id": 38,
       "options": {
@@ -2703,7 +2905,7 @@
         "h": 2,
         "w": 3,
         "x": 21,
-        "y": 17
+        "y": 16
       },
       "id": 39,
       "options": {
@@ -2770,7 +2972,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 19
+        "y": 18
       },
       "id": 33,
       "options": {
@@ -2844,7 +3046,7 @@
         "h": 2,
         "w": 4,
         "x": 0,
-        "y": 20
+        "y": 19
       },
       "id": 9,
       "options": {
@@ -2994,7 +3196,7 @@
         "h": 2,
         "w": 4,
         "x": 4,
-        "y": 20
+        "y": 19
       },
       "id": 11,
       "options": {
@@ -3172,7 +3374,7 @@
         "h": 8,
         "w": 6,
         "x": 8,
-        "y": 20
+        "y": 19
       },
       "id": 49,
       "options": {
@@ -3369,7 +3571,7 @@
         "h": 8,
         "w": 10,
         "x": 14,
-        "y": 20
+        "y": 19
       },
       "id": 56,
       "options": {
@@ -3645,7 +3847,7 @@
         "h": 2,
         "w": 4,
         "x": 0,
-        "y": 22
+        "y": 21
       },
       "id": 57,
       "options": {
@@ -3858,6 +4060,24 @@
           }
         },
         {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "lowerOrEqual",
+                  "options": {
+                    "value": 499
+                  }
+                },
+                "fieldName": "case (distinctCount) 1"
+              }
+            ],
+            "match": "all",
+            "type": "exclude"
+          }
+        },
+        {
           "id": "organize",
           "options": {
             "excludeByName": {
@@ -3899,6 +4119,7 @@
       "type": "stat"
     },
     {
+      "description": "Only applicable for git cases >= 500",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -3921,7 +4142,7 @@
         "h": 2,
         "w": 4,
         "x": 4,
-        "y": 22
+        "y": 21
       },
       "id": 54,
       "options": {
@@ -4134,6 +4355,24 @@
           }
         },
         {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "lowerOrEqual",
+                  "options": {
+                    "value": 499
+                  }
+                },
+                "fieldName": "case (distinctCount) 1"
+              }
+            ],
+            "match": "all",
+            "type": "exclude"
+          }
+        },
+        {
           "id": "organize",
           "options": {
             "excludeByName": {
@@ -4201,7 +4440,7 @@
         "h": 2,
         "w": 4,
         "x": 0,
-        "y": 24
+        "y": 23
       },
       "id": 16,
       "options": {
@@ -4351,7 +4590,7 @@
         "h": 2,
         "w": 4,
         "x": 4,
-        "y": 24
+        "y": 23
       },
       "id": 17,
       "options": {
@@ -4501,7 +4740,7 @@
         "h": 2,
         "w": 4,
         "x": 0,
-        "y": 26
+        "y": 25
       },
       "id": 15,
       "options": {
@@ -4695,7 +4934,7 @@
         "h": 2,
         "w": 4,
         "x": 4,
-        "y": 26
+        "y": 25
       },
       "id": 50,
       "options": {
@@ -4868,7 +5107,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 27
       },
       "id": 19,
       "panels": [],
@@ -4881,11 +5120,11 @@
         "h": 2,
         "w": 24,
         "x": 0,
-        "y": 29
+        "y": 28
       },
       "id": 30,
       "options": {
-        "content": "<center><h1 style=\"color:rgb(87, 147, 242);\">Individual Contributions</h1></center>",
+        "content": "<center><h1 style=\"color:rgb(87, 147, 242);\">Individual Contributions (${qa})</h1> \n</center>\n",
         "mode": "html"
       },
       "pluginVersion": "8.4.3",
@@ -4955,7 +5194,7 @@
         "h": 2,
         "w": 3,
         "x": 0,
-        "y": 31
+        "y": 30
       },
       "id": 27,
       "options": {
@@ -5044,7 +5283,7 @@
         "h": 2,
         "w": 3,
         "x": 3,
-        "y": 31
+        "y": 30
       },
       "id": 29,
       "options": {
@@ -5173,7 +5412,7 @@
         "h": 6,
         "w": 4,
         "x": 6,
-        "y": 31
+        "y": 30
       },
       "id": 21,
       "options": {
@@ -5335,7 +5574,7 @@
         "h": 6,
         "w": 7,
         "x": 10,
-        "y": 31
+        "y": 30
       },
       "hiddenSeries": false,
       "id": 43,
@@ -5532,7 +5771,7 @@
         "h": 6,
         "w": 7,
         "x": 17,
-        "y": 31
+        "y": 30
       },
       "hiddenSeries": false,
       "id": 59,
@@ -5765,7 +6004,7 @@
         "h": 2,
         "w": 6,
         "x": 0,
-        "y": 33
+        "y": 32
       },
       "id": 22,
       "options": {
@@ -5979,7 +6218,7 @@
         "h": 2,
         "w": 6,
         "x": 0,
-        "y": 35
+        "y": 34
       },
       "id": 23,
       "options": {
@@ -6117,7 +6356,7 @@
         }
       ],
       "timeFrom": "24h",
-      "title": "Distinct Case Status Count",
+      "title": "Test Execution Count (Distinct)",
       "type": "stat"
     }
   ],
@@ -6129,13 +6368,13 @@
     "list": [
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "sto",
           "value": "sto"
         },
         "hide": 0,
         "includeAll": false,
-        "label": "Product",
+        "label": "Choose Product",
         "multi": false,
         "name": "productLine",
         "options": [
@@ -6180,7 +6419,7 @@
             "value": "rcmd"
           }
         ],
-        "query": "product-line-1, product-line-2",
+        "query": "sto, promotion, paidads, wsa, stock_price, order, user, rcmd",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
@@ -6188,17 +6427,22 @@
       {
         "current": {
           "selected": false,
-          "text": "keshia.yapkt@example.com",
-          "value": "keshia.yapkt@example.com"
+          "text": "Click-to-choose",
+          "value": "Click-to-choose"
         },
         "hide": 0,
         "includeAll": false,
-        "label": "QA",
+        "label": "Choose QA",
         "multi": false,
         "name": "qa",
         "options": [
           {
             "selected": true,
+            "text": "Click-to-choose",
+            "value": "Click-to-choose"
+          },
+          {
+            "selected": false,
             "text": "keshia.yapkt@example.com",
             "value": "keshia.yapkt@example.com"
           },
@@ -6208,7 +6452,7 @@
             "value": "luohua.huang@example.com"
           }
         ],
-        "query": "keshia.yapkt@example.com, luohua.huang@example.com",
+        "query": "Click-to-choose, keshia.yapkt@example.com, luohua.huang@example.com",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
@@ -6223,6 +6467,6 @@
   "timezone": "",
   "title": "QEX",
   "uid": "uhQn62L7z",
-  "version": 130,
+  "version": 155,
   "weekStart": ""
 }
