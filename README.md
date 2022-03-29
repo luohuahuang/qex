@@ -13,5 +13,8 @@
 ## Golang Customised Version for QEX
 * Read [Golang for QEX](https://github.com/luohuahuang/go/blob/master/README.md)
 
+## Jenkins Plugin for QEX
+* Read [Jenkins Plugin](https://github.com/luohuahuang/qex-jenkins-plugin/blob/main/README.md)
+
 # Contribution
 * Co-authored by Huang Luohua, Joseph Chu, Keshia Yap, Chua Hockyao
