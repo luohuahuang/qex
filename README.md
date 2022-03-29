@@ -25,5 +25,9 @@
 * Send real-time Jenkins Job data to QEX platform
 * Read [Jenkins Plugin](https://github.com/luohuahuang/qex-jenkins-plugin/blob/main/README.md)
 
+## Grafana Dashboard
+* A one-stop dashboard for All AT stats. and metrics
+* Read [Grafana Config](grafana/QEX-dashboard.json)
+
 # Contribution
 * Co-authored by Huang Luohua, Joseph Chu, Keshia Yap, Chua Hockyao
