@@ -1,6 +1,8 @@
 package test_job
 
 import (
+	"errors"
+	"fmt"
 	"github.com/luohuahuang/qex/internal/test_execution"
 	"github.com/luohuahuang/qex/monitor"
 	"github.com/luohuahuang/qex/protocol"
@@ -16,7 +18,7 @@ func Handler(c *gin.Context) {
 	}
 
 	if err := test_execution.Process(testCase); err != nil {
-		monitor.SendAlert(err)
+		monitor.SendAlert(errors.New(fmt.Sprintf("[ERROR] Test Execution: %v\n%v", err.Error(), testCase)))
 		return
 	}
 }

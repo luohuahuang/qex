@@ -5,10 +5,11 @@ import (
 	"errors"
 	"fmt"
 	"github.com/luohuahuang/qex/config"
-	gitUtils "github.com/luohuahuang/qex/internal/git"
+	"github.com/luohuahuang/qex/internal/influx"
 	"github.com/luohuahuang/qex/internal/kafka"
 	"github.com/luohuahuang/qex/monitor"
 	"github.com/luohuahuang/qex/protocol"
+	"log"
 	"os"
 	"strings"
 	"time"
@@ -29,10 +30,12 @@ func Consume(k *kafka.Consumer) {
 			if msg == nil || msg.Topic != k.Topic {
 				continue
 			}
+			log.Println(fmt.Sprintf("topic: %s; msg: %s", msg.Topic, string(msg.Value)))
+
 			process(string(msg.Value))
 			err := k.ConsumerGroup.CommitUpto(msg)
 			if err != nil {
-				monitor.SendAlert(err)
+				log.Println("error commit zookeeper: ", err.Error())
 			}
 		}
 	}
@@ -46,18 +49,19 @@ func process(msgId string) {
 	} else {
 		scanner := bufio.NewScanner(file)
 		for scanner.Scan() {
-			// ea70897 john.don@example.com 2022-02-16 Test_find_something 18 ./find_something_test.go
+			// ea70897 keshia.yapkt@example.com 2022-02-16 Test_abc_def_verify_ghi 18 ./get_param_test.go
 			row := strings.Split(scanner.Text(), " ")
 			if len(row) < 4 {
 				monitor.SendAlert(errors.New(fmt.Sprintf("found corrupted git record: %s", row)))
 			} else {
 				git := protocol.Git{
 					RunId:      fmt.Sprintf("%s", time.Now().Format("2006-01-02-15:04:05")),
+					CommitId:   row[0],
 					Maintainer: row[1],
 					Case:       row[3],
 					Product:    product,
 				}
-				gitUtils.Process(git)
+				influx_utils.ProcessGitMaintainer(git)
 			}
 		}
 	}

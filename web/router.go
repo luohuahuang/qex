@@ -2,6 +2,7 @@ package web
 
 import (
 	"github.com/luohuahuang/qex/web/handlers/v1/git"
+	"github.com/luohuahuang/qex/web/handlers/v1/jenkins"
 	"github.com/luohuahuang/qex/web/handlers/v1/test_job"
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
@@ -25,6 +26,9 @@ func NewRouter() *Router {
 
 	gitAPIs := v1API.Group("/git")
 	gitAPIs.POST("/upload", git.Handler)
+
+	jenkinsAPIs := v1API.Group("/jenkins")
+	jenkinsAPIs.POST("/upload", jenkins.Handler)
 
 	return &Router{
 		router,
