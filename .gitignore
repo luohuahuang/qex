@@ -1,0 +1,33 @@
+# all built binaries
+bin/*
+
+# golang vendor files
+vendor/
+
+# test files
+*.test
+
+.local/
+
+# runtime logs
+log/
+
+# vscode config
+.vscode/
+
+# pyc
+*.pyc
+
+# Goland config
+*.idea/
+*.swp
+*.iml
+.DS_STORE
+local.yml
+
+# .sync & .lock
+*.sync
+
+junit*
+
+**/credential.txt
