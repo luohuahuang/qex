@@ -1,4 +1,5 @@
 # QEX: Automated Testing Observability and Developer (QA) Experience Framework
+* A video demo introduction can be seen from https://badquality.org/qex-demo-video/
 
 ## QEX Setup and QEX Web Service
 * Provide Web APIs for data sources to upload data
