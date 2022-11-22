@@ -20,7 +20,7 @@
 
 ## Golang Customised Version for QEX
 * Send real-time test stats to QEX platform
-* Read [Golang for QEX](https://github.com/luohuahuang/go/-/tree/master)
+* Read [Golang for QEX](https://github.com/luohuahuang/go/)
 * Contact us to port over it for Java, Python or other languages
 
 ## Jenkins Plugin for QEX
