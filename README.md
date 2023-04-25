@@ -2,6 +2,7 @@
 * [IEEE Paper](doc/IEEE-ICST-camera-ready-ver.pdf)
 * [IEEE Presentation](doc/IEEE-presentation.pdf)
 * https://conf.researchr.org/details/icst-2023/icst-2023-testing-tool/22/QEX-Automated-Testing-Observability-and-QA-Developer-Experience-Framework
+* [Patent](doc/patent.pdf)
 * A video demo introduction can be seen from https://badquality.org/qex-demo-video/
 
 ## QEX Setup and QEX Web Service
