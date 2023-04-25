@@ -1,5 +1,5 @@
 # QEX: Automated Testing Observability and Developer (QA) Experience Framework
-* [IEEE Paper](doc/IEEE-ICST-camera-ready-ver.pdf)
+* [IEEE Paper](doc/IEEE-ICST.pdf)
 * [IEEE Presentation](doc/IEEE-presentation.pdf)
 * https://conf.researchr.org/details/icst-2023/icst-2023-testing-tool/22/QEX-Automated-Testing-Observability-and-QA-Developer-Experience-Framework
 * [Patent](doc/patent.pdf)
